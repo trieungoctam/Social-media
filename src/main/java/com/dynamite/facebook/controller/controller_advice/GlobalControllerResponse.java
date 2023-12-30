@@ -12,7 +12,7 @@ import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
-@ControllerAdvice(value = {"com.dynamite.HelloWorldNgocTam"})
+@ControllerAdvice(value = {"com.dynamite.facebook"})
 public class GlobalControllerResponse implements ResponseBodyAdvice<Object> {
 
     @Override
@@ -21,12 +21,13 @@ public class GlobalControllerResponse implements ResponseBodyAdvice<Object> {
     }
 
     @Override
-    public BaseResponseBody<?> beforeBodyWrite(@Nullable Object body, MethodParameter returnType, MediaType selectedContentType,
-                                  Class<? extends HttpMessageConverter<?>> selectedConverterType,
-                                  ServerHttpRequest request, ServerHttpResponse response) {
-        if (body instanceof BaseResponseBody) {
-            return (BaseResponseBody<?>) body;
+    public BaseResponseBody<?> beforeBodyWrite(@Nullable Object data,
+                                               MethodParameter returnType, MediaType selectedContentType,
+                                               Class<? extends HttpMessageConverter<?>> selectedConverterType,
+                                               ServerHttpRequest request, ServerHttpResponse response) {
+        if (data instanceof BaseResponseBody) {
+            return (BaseResponseBody<?>) data;
         }
-        return new BaseResponseBody<>(ResponseValue.SUCCESS, body);
+        return new BaseResponseBody<>(ResponseValue.SUCCESS, data);
     }
 }

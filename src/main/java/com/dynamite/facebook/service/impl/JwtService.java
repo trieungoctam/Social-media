@@ -1,5 +1,7 @@
 package com.dynamite.facebook.service.impl;
 
+import com.dynamite.facebook.constant.ResponseValue;
+import com.dynamite.facebook.exception.ResponseException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -27,8 +29,7 @@ public class JwtService {
         return Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
     }
     public String generateTokenFromUsername(String username) {
-        System.out.println("jwtSecret: " + jwtSecret);
-        System.out.println("jwtExpirationMs: " + jwtExpirationMs);
+
         return Jwts.builder()
                 .setSubject(username)
                 .setExpiration(new Date(System.currentTimeMillis() + Long.parseLong(jwtExpirationMs)))
@@ -43,7 +44,7 @@ public class JwtService {
                 .getBody()
                 .getSubject();
     }
-    public boolean validateToken(String token) {
+    public boolean validateToken(String token){
         try {
             Jwts.parserBuilder()
                     .setSigningKey(getKey())

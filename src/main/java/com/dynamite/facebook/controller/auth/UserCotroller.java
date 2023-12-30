@@ -1,5 +1,8 @@
 package com.dynamite.facebook.controller.auth;
 
+import com.dynamite.facebook.model.entity.User;
+import com.dynamite.facebook.service.IUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -7,9 +10,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/user")
 public class UserCotroller {
 
-    @GetMapping("/test")
+    @Autowired
+    private IUserService userService;
+
+    @GetMapping("/")
     @ResponseBody
-    public String test() {
-        return "Hello World";
+    public User getAllUser() {
+        return userService.test();
     }
 }

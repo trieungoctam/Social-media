@@ -12,5 +12,4 @@ import java.util.List;
 public interface IAuthService {
     ResponseSignUp signUp(RequestSignUp requestInputSignUp) throws ResponseException;
     ResponseLogin signIn(RequestLogin requestInputLogin) throws ResponseException;
-    List<User> findAll();
 }

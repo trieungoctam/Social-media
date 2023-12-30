@@ -10,17 +10,9 @@ import java.util.List;
 
 @SpringBootTest
 class FacebookApplicationTests {
-	@Autowired
-	UserRepository userRepository;
+
 	@Test
 	void contextLoads() {
-		User user = new User();
-		user.setUsername("admin");
-		user.setPassword("admin");
-		user.setFirstName("admin");
-		user.setLastName("admin");
-		user.setEmail("admin");
-		userRepository.save(user);
 	}
 
 }

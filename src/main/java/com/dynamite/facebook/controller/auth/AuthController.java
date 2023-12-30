@@ -21,7 +21,6 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseSignUp signUp(@RequestBody RequestSignUp requestInputSignUp) throws ResponseException {
-        System.out.println("requestInputSignUp: " + requestInputSignUp.getUsername() + " " + requestInputSignUp.getPassword());
         return authenService.signUp(requestInputSignUp);
     }
 
@@ -30,8 +29,4 @@ public class AuthController {
         return authenService.signIn(requestInputLogin);
     }
 
-    @GetMapping("/test")
-    public List<User> test() {
-        return authenService.findAll();
-    }
 }

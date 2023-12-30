@@ -65,8 +65,4 @@ public class AuthService implements IAuthService {
         return new ResponseLogin(jwt);
     }
 
-    @Override
-    public List<User> findAll() {
-        return userRepository.findAll();
-    }
 }
