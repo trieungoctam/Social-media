@@ -1,4 +1,4 @@
-package com.dynamite.facebook.controller.auth;
+package com.dynamite.facebook.controller;
 
 import com.dynamite.facebook.model.entity.User;
 import com.dynamite.facebook.service.IUserService;

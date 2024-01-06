@@ -1,4 +1,4 @@
-package com.dynamite.facebook.controller.auth;
+package com.dynamite.facebook.controller;
 
 import com.dynamite.facebook.exception.ResponseException;
 import com.dynamite.facebook.model.dto.auth.RequestLogin;
