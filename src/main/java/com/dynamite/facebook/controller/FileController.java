@@ -18,7 +18,6 @@ public class FileController {
     @PostMapping("/upload")
     @Transactional
     public ResponseUploadFile uploadImg(@RequestParam("file") MultipartFile file) {
-        ResponseUploadFile responseUploadFile = minioStorageService.uploadFile(file);
-        return responseUploadFile;
+        return minioStorageService.uploadFile(file);
     }
 }

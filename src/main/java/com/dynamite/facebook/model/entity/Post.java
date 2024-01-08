@@ -15,6 +15,7 @@ import java.sql.Timestamp;
 public class Post {
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "`share_id`")
     private Long shareId;
