@@ -1,5 +1,6 @@
 package com.dynamite.facebook.controller;
 
+import com.dynamite.facebook.exception.ResponseException;
 import com.dynamite.facebook.model.entity.User;
 import com.dynamite.facebook.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,5 +18,11 @@ public class UserCotroller {
     @ResponseBody
     public User getAllUser() {
         return userService.test();
+    }
+
+    @GetMapping("/{id}")
+    @ResponseBody
+    public User getUserById(@PathVariable("id") Long id) throws ResponseException {
+        return userService.getUserById(id);
     }
 }

@@ -36,5 +36,16 @@ public class PostService implements IPostService {
         return postRepository.findAllByUser_Id(userId);
     }
 
+    @Override
+    public void deletePost(Long postId) {
+        postRepository.deleteById(postId);
+    }
+
+    @Override
+    public Post updatePost(Post post) {
+        post = postRepository.save(post);
+        return post;
+    }
+
 
 }
