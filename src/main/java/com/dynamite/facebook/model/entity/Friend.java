@@ -12,10 +12,11 @@ import lombok.NoArgsConstructor;
 @Data
 public class Friend {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @ManyToOne
     @JoinColumn(name = "sender_id", referencedColumnName = "id")
     private User senderId;
-    @Id
     @ManyToOne
     @JoinColumn(name = "receiver_id", referencedColumnName = "id")
     private User receiverId;

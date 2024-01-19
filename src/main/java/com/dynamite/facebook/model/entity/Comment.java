@@ -15,6 +15,7 @@ import java.sql.Timestamp;
 public class Comment {
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     @JoinColumn(name="user_id", referencedColumnName = "id")

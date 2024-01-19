@@ -11,7 +11,7 @@ public class PostMapper {
         responsePost.setId(post.getId());
         responsePost.setShareId(post.getShareId());
         responsePost.setUserId(post.getUser().getId());
-        responsePost.setUrl(post.getResources());
+        responsePost.setResources(post.getResources());
         responsePost.setContent(post.getContent());
         responsePost.setReactCount(post.getReact_count());
         responsePost.setPublished(post.getPublished());

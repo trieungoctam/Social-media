@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class RequestComment {
+public class CommentDTO {
     private Long userId;
     private Long postId;
     private Timestamp createdAt;

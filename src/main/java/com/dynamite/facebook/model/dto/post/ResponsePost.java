@@ -13,7 +13,7 @@ public class ResponsePost {
     private Long id;
     private Long shareId;
     private Long userId;
-    private String url;
+    private String resources;
     private String content;
     private Long reactCount;
     private int published;

@@ -1,4 +1,7 @@
 package com.dynamite.facebook.service;
 
-public interface ICacheService {
+import com.dynamite.facebook.exception.ResponseException;
+
+public interface ICacheService<T> {
+    T getBackendData(Long key) throws ResponseException;
 }

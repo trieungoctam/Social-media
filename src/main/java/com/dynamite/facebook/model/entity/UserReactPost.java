@@ -12,10 +12,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserReactPost {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id"   )
     private User user;
-    @Id
     @ManyToOne
     @JoinColumn(name = "post_id", referencedColumnName = "id")
     private Post post;

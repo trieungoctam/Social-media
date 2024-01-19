@@ -2,8 +2,10 @@ package com.dynamite.facebook.service.impl;
 
 import com.dynamite.facebook.constant.ResponseValue;
 import com.dynamite.facebook.exception.ResponseException;
+import com.dynamite.facebook.model.dto.user.UserDTO;
 import com.dynamite.facebook.model.entity.User;
 import com.dynamite.facebook.repository.UserRepository;
+import com.dynamite.facebook.service.ICacheService;
 import com.dynamite.facebook.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UserService implements IUserService {
+public class UserService implements IUserService, ICacheService<User> {
     @Autowired
     private UserRepository userRepository;
     @Override
@@ -43,9 +45,11 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User updateUser(User user) throws ResponseException {
-        if (!userRepository.findById(user.getId()).isPresent())
-            throw  new ResponseException(ResponseValue.NOT_FOUND);
+    public User updateUser(Long id, UserDTO userDTO) throws ResponseException {
+        User user = userRepository.findById(id).orElseThrow(() -> new ResponseException(ResponseValue.NOT_FOUND));
+        user.setAvatarUrl(userDTO.getAvatarUrl());
+        user.setEmail(userDTO.getEmail());
+        user.setAbout(userDTO.getAbout());
         return userRepository.save(user);
     }
 
@@ -62,5 +66,10 @@ public class UserService implements IUserService {
     @Override
     public void deleteUsers(List<Long> userIds) {
 
+    }
+
+    @Override
+    public User getBackendData(Long key) throws ResponseException {
+        return getUserById(key);
     }
 }

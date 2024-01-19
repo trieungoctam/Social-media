@@ -5,6 +5,6 @@ import com.dynamite.facebook.model.entity.Post;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface PostMapper {
+public interface IPostMapper {
     Post toPost(RequestPost requestPost);
 }
