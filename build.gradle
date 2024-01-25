@@ -23,6 +23,8 @@ repositories {
 }
 
 dependencies {
+	implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.0.3'
+	implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui:2.3.0'
 	implementation 'com.google.guava:guava:33.0.0-jre'
 	implementation 'com.fasterxml.uuid:java-uuid-generator:4.3.0'
 	implementation 'io.minio:minio:8.3.3'
