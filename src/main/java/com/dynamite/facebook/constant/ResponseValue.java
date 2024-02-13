@@ -22,8 +22,10 @@ public enum ResponseValue {
     // 500 Internal server error
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error"),
     // 503 Service unavailable
-    SERVICE_UNAVAILABLE(HttpStatus.SERVICE_UNAVAILABLE, "Service unavailable");
+    SERVICE_UNAVAILABLE(HttpStatus.SERVICE_UNAVAILABLE, "Service unavailable"),
 
+    // Upload file error
+    UPLOAD_FILE_ERROR(HttpStatus.BAD_REQUEST, "Upload file error");
 
     private HttpStatus status;
     private String message;

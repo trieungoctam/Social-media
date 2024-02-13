@@ -13,6 +13,7 @@ import com.dynamite.facebook.service.impl.MinioStorageService;
 import com.dynamite.facebook.service.impl.PostMapper;
 import com.dynamite.facebook.service.impl.PostService;
 import com.dynamite.facebook.util.LoadingCacheStore;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,9 +39,11 @@ public class PostController {
     @PostMapping("/create")
     @Transactional
     public ResponsePost createPost(@RequestParam("file") MultipartFile file, @RequestParam("content") String content) throws ResponseException {
-        ResponseUploadFile responseUploadFile = minioStorageService.uploadFile(file);
-        if (responseUploadFile == null) {
-            throw new ResponseException(ResponseValue.BAD_REQUEST);
+        System.out.println("PostController.createPost");
+        ResponseUploadFile responseUploadFile = null;
+        if (file != null ) responseUploadFile = minioStorageService.uploadFile(file);
+        if (file != null && responseUploadFile == null) {
+            throw new ResponseException(ResponseValue.UPLOAD_FILE_ERROR);
         }
         UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Post post = postService.createPost(userDetails.getId(), responseUploadFile.getUrlFile(), content);
