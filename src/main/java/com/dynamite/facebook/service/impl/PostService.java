@@ -37,7 +37,13 @@ public class PostService implements IPostService, ICacheService<Post> {
 
     @Override
     public List<Post> getPostByUserId(Long userId) {
-        return postRepository.findAllByUser_Id(userId);
+        return postRepository.findAllByUser_Id(userId).stream().map(post -> {
+            String url = post.getResources();
+            url = url.split("\\?")[0].split(":")[2];
+            url = "http://52.184.81.213:" + url;
+            post.setResources(url);
+            return post;
+        }).toList();
     }
 
     @Override
@@ -60,9 +66,27 @@ public class PostService implements IPostService, ICacheService<Post> {
         return postRepository.findById(postId).orElseThrow(() -> new ResponseException(ResponseValue.NOT_FOUND));
     }
 
+    @Override
+    public void deleteById(Long id) {
+        postRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Post> findAll() {
+        return postRepository.findAll().stream().map(post -> {
+            String url = post.getResources();
+            url = url.split("\\?")[0].split(":")[2];
+            url = "http://52.184.81.213:" + url;
+            post.setResources(url);
+            return post;
+        }).toList();
+    }
+
 
     @Override
     public Post getBackendData(Long key) throws ResponseException {
         return getPostById(key);
     }
+
+
 }

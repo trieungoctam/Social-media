@@ -6,9 +6,11 @@ import com.dynamite.facebook.model.dto.auth.RequestLogin;
 import com.dynamite.facebook.model.dto.auth.RequestSignUp;
 import com.dynamite.facebook.model.dto.auth.ResponseLogin;
 import com.dynamite.facebook.model.dto.auth.ResponseSignUp;
+import com.dynamite.facebook.model.dto.user.UserDTO;
 import com.dynamite.facebook.model.entity.User;
 import com.dynamite.facebook.repository.UserRepository;
 import com.dynamite.facebook.service.IAuthService;
+import com.dynamite.facebook.service.UserMapper;
 import com.dynamite.facebook.service.UserRequestMapper;
 import com.dynamite.facebook.service.UserResponseMapper;
 import lombok.AllArgsConstructor;
@@ -34,6 +36,8 @@ public class AuthService implements IAuthService {
     private final UserResponseMapper userResponseMapper;
 
     private final AuthenticationManager authenticationManager;
+
+    private final UserMapper userMapper;
 
     private final JwtService jwtService;
 
@@ -62,7 +66,8 @@ public class AuthService implements IAuthService {
         );
         SecurityContextHolder.getContext().setAuthentication(authenticate);
         String jwt = jwtService.generateTokenFromUsername(user.getUsername());
-        return new ResponseLogin(jwt);
+        UserDTO userDTO = userMapper.toUserDTO(user);
+        return new ResponseLogin(jwt, userDTO);
     }
 
 }

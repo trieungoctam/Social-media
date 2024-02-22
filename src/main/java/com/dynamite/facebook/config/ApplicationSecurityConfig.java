@@ -33,8 +33,8 @@ public class ApplicationSecurityConfig{
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/*")
-                        .allowedOrigins("/*")
+                registry.addMapping("*")
+                        .allowedOrigins("*")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS", "HEAD", "TRACE", "CONNECT")
                         .allowCredentials(true)
                         .maxAge(3600);

@@ -16,4 +16,5 @@ public interface IUserService {
     List<User> updateUsers(List<User> users);
     void deleteUser(int userId);
     void deleteUsers(List<Long> userIds);
+    User getUserByUsername(String username);
 }

@@ -41,12 +41,17 @@ public class FriendService implements IFriendService {
     }
 
     @Override
-    public Friend updateIsFriend(long senderId, long receiverId, int isFriend) {
-        return friendRepository.updateIsFriend(senderId, receiverId, isFriend);
+    public Friend updateIsFriend(Friend friend) {
+        return friendRepository.save(friend);
     }
 
     @Override
     public List<Friend> findAllNotAcceptedFriendById(long id) {
         return friendRepository.findAllNotAcceptedFriendById(id);
+    }
+
+    @Override
+    public Integer checkIsFriend(long senderId, long receiverId) {
+        return friendRepository.checkFriend(senderId, receiverId);
     }
 }

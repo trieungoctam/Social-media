@@ -10,6 +10,7 @@ public interface IFriendService {
     Friend save(FriendDTO friendDTO);
     List<Friend> findAllFriendById(long id);
     int checkFriend(long senderId, long receiverId);
-    Friend updateIsFriend(long senderId, long receiverId, int isFriend);
+    Friend updateIsFriend(Friend friend);
     List<Friend> findAllNotAcceptedFriendById(long id);
+    Integer checkIsFriend(long senderId, long receiverId);
 }

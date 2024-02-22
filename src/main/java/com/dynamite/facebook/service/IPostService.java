@@ -12,4 +12,8 @@ public interface IPostService {
     void deletePost(Long postId);
     Post updatePost(Long postId, RequestPost requestPost) throws ResponseException;
     Post getPostById(Long postId) throws ResponseException;
+
+    void deleteById(Long id);
+
+    List<Post> findAll();
 }

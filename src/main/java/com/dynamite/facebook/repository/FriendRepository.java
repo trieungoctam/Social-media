@@ -10,11 +10,11 @@ import java.util.List;
 @Repository
 public interface FriendRepository extends JpaRepository<Friend, Long> {
     @Query(value =
-            "select distinct * from friend f where f.is_friend = 1 and (f.sender_id = ?1 or f.receiver_id = ?1)"
+            "select distinct * from friend f where f.is_friend = 1 and f.sender_id = ?1"
             , nativeQuery = true)
     List<Friend> findAllFriendById(long id);
     @Query(value =
-            "select f.is_friend from friend f where f.sender_id = ?1 or f.receiver_id = ?2"
+            "select f.is_friend top 1 from friend f where f.sender_id = ?1 and f.receiver_id = ?2 or f.sender_id = ?2 and f.receiver_id = ?1"
             , nativeQuery = true)
     int checkFriend(long senderId, long receiverId);
     @Query(value =

@@ -47,8 +47,8 @@ public class UserService implements IUserService, ICacheService<User> {
     @Override
     public User updateUser(Long id, UserDTO userDTO) throws ResponseException {
         User user = userRepository.findById(id).orElseThrow(() -> new ResponseException(ResponseValue.NOT_FOUND));
-        user.setAvatarUrl(userDTO.getAvatarUrl());
-        user.setEmail(userDTO.getEmail());
+        user.setFirstName(userDTO.getFirstName());
+        user.setLastName(userDTO.getLastName());
         user.setAbout(userDTO.getAbout());
         return userRepository.save(user);
     }
@@ -66,6 +66,12 @@ public class UserService implements IUserService, ICacheService<User> {
     @Override
     public void deleteUsers(List<Long> userIds) {
 
+    }
+
+    @Override
+    public User getUserByUsername(String username) {
+        System.out.println("username: service -> " + username);
+        return userRepository.findByUsername(username).orElse(null);
     }
 
     @Override

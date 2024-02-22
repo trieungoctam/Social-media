@@ -31,11 +31,13 @@ public class MinioHelper {
     @Value("${spring.minio.url}")
     private String url;
     public ResponseUploadFile uploadFile(MultipartFile file) throws Exception{
+
         try (InputStream inputStream = file.getInputStream()){
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
             String uploadFileName = UUID.randomUUID().toString() + "_" + sdf.format(new Date()) + "_" +
                     file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
             final String urlFile = bucketName + "/" + "ngoctam" + "/" +  new String(uploadFileName.getBytes("UTF-8"), "UTF-8");
+
             PutObjectArgs putObjectOptions = PutObjectArgs.builder()
                     .bucket(bucketName)
                     .object(urlFile)

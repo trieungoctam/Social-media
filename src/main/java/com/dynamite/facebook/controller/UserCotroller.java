@@ -49,4 +49,14 @@ public class UserCotroller {
             throw new ResponseException(ResponseValue.BAD_REQUEST);
         }
     }
+    @GetMapping("/profile/")
+    public UserDTO getUserByUsername(@RequestParam String username) throws ResponseException{
+        try {
+            System.out.println("username: controller -> " + username);
+            User user = userService.getUserByUsername(username);
+            return userMapper.toUserDTO(user);
+        }catch (Exception e){
+            throw new ResponseException(ResponseValue.NOT_FOUND);
+        }
+    }
 }

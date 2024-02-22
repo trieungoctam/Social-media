@@ -24,6 +24,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/post")
+@CrossOrigin(origins = "*")
 public class PostController {
     @Autowired
     private MinioStorageService minioStorageService;
@@ -39,10 +40,10 @@ public class PostController {
     @PostMapping("/create")
     @Transactional
     public ResponsePost createPost(@RequestParam("file") MultipartFile file, @RequestParam("content") String content) throws ResponseException {
-        System.out.println("PostController.createPost");
         ResponseUploadFile responseUploadFile = null;
         if (file != null ) responseUploadFile = minioStorageService.uploadFile(file);
         if (file != null && responseUploadFile == null) {
+
             throw new ResponseException(ResponseValue.UPLOAD_FILE_ERROR);
         }
         UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -51,8 +52,8 @@ public class PostController {
     }
 
     @GetMapping("/")
-    public List<ResponsePost> getPostByUserId(@RequestBody RequestPostUser requestPostUser) {
-        List<Post> posts = postService.getPostByUserId(requestPostUser.getUserId());
+    public List<ResponsePost> getPostByUserId(@RequestParam Long id) {
+        List<Post> posts = postService.getPostByUserId(id);
         return posts.stream().map(postMapper::toResponsePost).toList();
     }
 
@@ -74,5 +75,15 @@ public class PostController {
         }catch(Exception e) {
             throw new ResponseException(ResponseValue.NOT_FOUND);
         }
+    }
+    @DeleteMapping("/{id}")
+    public void deletePost(@PathVariable("id") Long id) {
+        postService.deleteById(id);
+    }
+
+    @GetMapping("/all")
+    public List<ResponsePost> getAllPost() {
+        List<Post> posts = postService.findAll();
+        return posts.stream().map(postMapper::toResponsePost).toList();
     }
 }

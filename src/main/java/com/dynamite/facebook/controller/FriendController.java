@@ -24,6 +24,10 @@ public class FriendController {
     }
     @PutMapping("/")
     public Friend updateIsFriend(@RequestBody Friend friend) {
-        return friendService.updateIsFriend(friend.getSenderId().getId(), friend.getReceiverId().getId(), friend.getIsFriend());
+        return friendService.updateIsFriend(friend);
+    }
+    @GetMapping("/check")
+    public Integer checkIsFriend(@RequestParam int senderId, @RequestParam int receiverId) {
+        return friendService.checkIsFriend(senderId, receiverId);
     }
 }

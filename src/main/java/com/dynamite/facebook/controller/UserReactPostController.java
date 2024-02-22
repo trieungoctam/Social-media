@@ -20,15 +20,16 @@ public class UserReactPostController {
     private IUserReactPostService userReactPostService;
     @PostMapping("/add")
     public void addReact(@RequestBody ReactDTO reactDTO) throws ResponseException {
+        System.out.println(reactDTO);
         userReactPostService.addReact(reactDTO.getPostId(),reactDTO.getUserId(),reactDTO.getReactType());
     }
     @DeleteMapping("/delete")
-    public void deleteReact(@RequestBody ReactRequestDTO reactDTO) throws ResponseException {
-        userReactPostService.removeReact(reactDTO.getPostId(),reactDTO.getUserId());
+    public void deleteReact(@RequestParam Long postId, @RequestParam Long userId) throws ResponseException {
+        userReactPostService.removeReact(postId,userId);
     }
 
-    @GetMapping("/")
-    public List<UserReactPost> findAllByPostId(@RequestBody ReactPostDTO postId) {
-        return userReactPostService.findAllByPost_Id(postId.getPostId());
+    @GetMapping("/{id}")
+    public List<UserReactPost> findAllByPostId(@PathVariable("id") Long postId) {
+        return userReactPostService.findAllByPost_Id(postId);
     }
 }

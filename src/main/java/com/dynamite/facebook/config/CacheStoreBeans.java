@@ -17,6 +17,6 @@ public class CacheStoreBeans {
     }
     @Bean
     public LoadingCacheStore<Post> postLoadingCache(ICacheService<Post> postCacheService) {
-        return new LoadingCacheStore<>(1, TimeUnit.MINUTES, postCacheService);
+        return new LoadingCacheStore<>(30, TimeUnit.SECONDS, postCacheService);
     }
 }

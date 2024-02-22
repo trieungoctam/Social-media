@@ -10,7 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ReactDTO {
-    Long UserId;
-    Long PostId;
-    Integer ReactType;
+    Long userId;
+    Long postId;
+    Integer reactType;
 }
